@@ -1,0 +1,5 @@
+export const brands = [
+  { id: 1, name: "Clorox", logo: "https://www.thecloroxcompany.com/wp-content/uploads/2022/06/clorox@4x.png?width=330&height=330&fit=crop" },
+  { id: 2, name: "Lysol", logo: "https://eu-images.contentstack.com/v3/assets/blt9ca8222b5acaa556/blt5e5579d5b2fb5f87/658357b537d7700407519fd8/Logo-Lysol_(1).png?width=400&height=400&format=webp&quality=80" },
+  { id: 3, name: "Mr. Músculo", logo: "https://scontent.fccp1-1.fna.fbcdn.net/v/t39.30808-6/352765629_273160315077753_3886440195725648027_n.png?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHaEKlNVImDmG0dee_g7ZNL91nQrmLWnwf3WdCuYtafB0FvMjH1BHb_ouJrheiiPFM&_nc_ohc=kYLvO98WYXUQ7kNvwHLyW1-&_nc_oc=AdnJLtb66kQ8iqbT0m4bVJP_K159lJnPZCnHVw-SneJtzHJCJ18MEvZxibFknG498JqC3tbtv3kXpiQw8OQRr1zr&_nc_zt=23&_nc_ht=scontent.fccp1-1.fna&_nc_gid=niQtd3cBCXET4zL1hp_6kA&oh=00_AfnOBWmXbtLJ6A7dRBiQTUML6LN4m4lgfikAZLY75rranQ&oe=6957B309" }
+];

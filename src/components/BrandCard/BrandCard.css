@@ -1,0 +1,18 @@
+.brand-card {
+  background: #0b0b0beb;
+  color: #0b1220;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  min-height: 92px;
+}
+
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #f1f5f9;
+  display: block;
+  flex: 0 0 auto;
+}

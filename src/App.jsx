@@ -8,6 +8,8 @@ import { products } from "./components/ProductCard/products";
 import ProductCard from "./components/ProductCard/ProductCard";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
 import { reviews } from "./components/ReviewCard/reviews";
+import { brands } from "./components/BrandCard/brands";
+import BrandCard from "./components/BrandCard/BrandCard";
 
 import "./App.css";
 
@@ -25,6 +27,9 @@ export default function App() {
   const visibleReviews = useMemo(() => {
     return reviews.slice(0, 3);
   }, []);
+
+  // Brands
+  const visibleBrands = useMemo(() => brands.slice(0, 3), []);
 
   return (
     <>
@@ -78,6 +83,18 @@ export default function App() {
           <div className="grid">
             {visibleReviews.map((r) => (
               <ReviewCard key={r.id} review={r} />
+            ))}
+          </div>
+        </section>
+
+        <section id="marcas" className="brands-section">
+          <div className="section-head">
+            <h2>Nuestras marcas destacadas</h2>
+          </div>
+
+          <div className="brands-grid">
+            {visibleBrands.map((b) => (
+              <BrandCard key={b.id} brand={b} />
             ))}
           </div>
         </section>

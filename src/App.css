@@ -120,6 +120,18 @@
   font-weight: 600;
 }
 
+/* Apartado Brands */
+.brands-section {
+  margin-top: 26px;
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
 /* FOOTER */
 .footer {
   margin-top: 26px;
