@@ -1,0 +1,36 @@
+.faq-item {
+  background: #ffffff;
+  color: #0b1220;
+  border-radius: 14px;
+  border: 2px solid #a3ff12;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-question:hover {
+  background: #f8fafc;
+}
+
+.icon {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.faq-answer {
+  padding: 0 16px 16px;
+  color: #334155;
+  font-weight: 600;
+}

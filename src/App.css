@@ -132,6 +132,26 @@
   margin-top: 10px;
 }
 
+/* Apartado FAQs */
+.faqs-section {
+  margin-top: 26px;
+}
+
+.faqs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Apartado Nosotros */
+.about {
+  margin-top: 26px;
+  padding: 16px;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  background: #0b0b0ba4;
+}
+
 /* FOOTER */
 .footer {
   margin-top: 26px;

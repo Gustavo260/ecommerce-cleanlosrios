@@ -10,6 +10,8 @@ import ReviewCard from "./components/ReviewCard/ReviewCard";
 import { reviews } from "./components/ReviewCard/reviews";
 import { brands } from "./components/BrandCard/brands";
 import BrandCard from "./components/BrandCard/BrandCard";
+import { faqs } from "./components/FaqItem/faqs";
+import FaqItem from "./components/FaqItem/FaqItem";
 
 import "./App.css";
 
@@ -97,6 +99,24 @@ export default function App() {
               <BrandCard key={b.id} brand={b} />
             ))}
           </div>
+        </section>
+
+        <section id="faqs" className="faqs-section">
+          <div className="section-head">
+            <h2>Preguntas Frecuentes</h2>
+            <p>Resolvemos tus dudas más comunes.</p>
+          </div>
+
+          <div className="faqs-list">
+            {faqs.map((faq) => (
+              <FaqItem key={faq.id} faq={faq} />
+            ))}
+          </div>
+        </section>
+
+        <section id="nosotros" className="about">
+          <h2>Nosotros</h2>
+          <p>Somos una empresa intermediaria de productos de limpieza entre empresas proveedoras de productos de aseo y limpieza</p>
         </section>
 
       </main>
