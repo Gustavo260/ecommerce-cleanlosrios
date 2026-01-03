@@ -1,0 +1,139 @@
+/* MENU */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: #00d4ff;
+  color: #001018;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #001018;
+  font-weight: 800;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.nav-right input {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 16, 24, 0.25);
+  outline: none;
+  min-width: 240px;
+}
+
+/* HEADER */
+.header {
+  margin: 18px auto 0;
+  max-width: 58%;
+  padding: 18px 20px;
+  background: #a3ff12;
+  color: #081200;
+  border-radius: 12px;
+}
+
+.header h1 {
+  margin: 0 0 6px 0;
+}
+
+.header p {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 58%;
+  margin: auto;
+  padding: 2%;
+}
+
+.results {
+  color: #e5e7eb;
+  margin: 16px 0 10px;
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-head {
+  margin: 14px 0 10px;
+  color: #e5e7eb;
+}
+
+.section-head h2 {
+  margin: 0 0 6px;
+}
+.section-head p {
+  margin: 0;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .brands-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .brands-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 26px;
+  text-align: center;
+  padding: 18px;
+  background: #00d4ff;
+  color: #1a0500;
+  font-weight: 900;
+}
