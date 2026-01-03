@@ -1,12 +1,16 @@
 import { useMemo, useState } from "react";
 
 // Importación de componentes
+import SearchBar from "./components/SearchBar/SearchBar";
 import { products } from "./components/ProductCard/products";
 import ProductCard from "./components/ProductCard/ProductCard";
 
 import "./App.css";
 
 export default function App() {
+  
+  // Search bar
+  const [search, setSearch] = useState("");
 
   // Productos de limpieza
   const visibleProducts = useMemo(() => {
@@ -39,6 +43,14 @@ export default function App() {
           Mostrando <strong>{visibleProducts.length}</strong> de{" "}
           <strong>{products.length}</strong>
           {" "} (máx. 9)
+        </div>
+
+        <div className="nav-right">
+          <SearchBar
+            value={search}
+            onChange={setSearch}
+            placeholder="Buscar producto..."
+          />
         </div>
 
         <div className="grid">
