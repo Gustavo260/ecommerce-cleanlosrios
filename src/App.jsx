@@ -6,6 +6,8 @@ import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
 import { products } from "./components/ProductCard/products";
 import ProductCard from "./components/ProductCard/ProductCard";
+import ReviewCard from "./components/ReviewCard/ReviewCard";
+import { reviews } from "./components/ReviewCard/reviews";
 
 import "./App.css";
 
@@ -17,6 +19,11 @@ export default function App() {
   // Productos de limpieza
   const visibleProducts = useMemo(() => {
     return products.slice(0, 3);
+  }, []);
+
+  // Reviews
+  const visibleReviews = useMemo(() => {
+    return reviews.slice(0, 3);
   }, []);
 
   return (
@@ -62,6 +69,18 @@ export default function App() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        <section id="reseñas" className="reviews-section">
+          <div className="section-head">
+            <h2>Reseñas</h2>
+          </div>
+
+          <div className="grid">
+            {visibleReviews.map((r) => (
+              <ReviewCard key={r.id} review={r} />
+            ))}
+          </div>
+        </section>
 
       </main>
 
