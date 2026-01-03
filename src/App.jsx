@@ -2,13 +2,15 @@ import { useMemo, useState } from "react";
 
 // Importación de componentes
 import SearchBar from "./components/SearchBar/SearchBar";
+import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
+import { promotions } from "./components/PromoCarousel/promotions";
 import { products } from "./components/ProductCard/products";
 import ProductCard from "./components/ProductCard/ProductCard";
 
 import "./App.css";
 
 export default function App() {
-  
+
   // Search bar
   const [search, setSearch] = useState("");
 
@@ -38,6 +40,8 @@ export default function App() {
       </header>
 
       <main id="productos" className="container">
+
+        <PromoCarousel items={promotions} autoPlay={true} intervalMs={4000} />
 
         <div className="results">
           Mostrando <strong>{visibleProducts.length}</strong> de{" "}
