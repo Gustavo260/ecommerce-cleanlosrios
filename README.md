@@ -34,3 +34,13 @@ Desktop:
 https://prnt.sc/Ti3ksgB9kfgD
 https://prnt.sc/drxS5u3rkw04
 https://prnt.sc/MBtr2tmL9oxj
+
+
+# Backend instalación
+
+npm init -y
+npm i express cors
+npm i -D typescript ts-node-dev @types/express @types/cors
+npx tsc --init
+npm run dev (para iniciarlo)
+
