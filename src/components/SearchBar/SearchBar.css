@@ -1,6 +1,8 @@
 .searchbar {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 21em; /* o el ancho que uses en tu nav */
 }
 
 .searchbar-input {
@@ -13,6 +15,21 @@
 
 .searchbar-input:focus {
   box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.35);
+}
+
+.searchbar-status {
+  min-height: 18px;
+  margin-top: 6px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.searchbar-loading {
+  color: #aaa;
+}
+
+.searchbar-error {
+  color: #ff4d4d;
 }
 
 @media (max-width: 520px) {

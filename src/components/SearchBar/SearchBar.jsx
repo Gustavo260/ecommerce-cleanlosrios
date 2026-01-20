@@ -4,6 +4,8 @@ export default function SearchBar({
   value,
   onChange,
   placeholder = "Buscar producto...",
+  loading = false,
+  error = "",
 }) {
   return (
     <div className="searchbar">
@@ -15,6 +17,11 @@ export default function SearchBar({
         placeholder={placeholder}
         aria-label={placeholder}
       />
+
+      <div className="searchbar-status" aria-live="polite">
+        {loading && <span className="searchbar-loading">Buscando...</span>}
+        {!loading && error && <span className="searchbar-error">{error}</span>}
+      </div>
     </div>
   );
 }

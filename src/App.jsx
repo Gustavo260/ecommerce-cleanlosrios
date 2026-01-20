@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // Importación de componentes
 import SearchBar from "./components/SearchBar/SearchBar";
@@ -17,17 +17,50 @@ import "./App.css";
 
 export default function App() {
 
-  // Search bar
+  // Search bar lógica Inicio
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
-  // Productos de limpieza
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, []);
+
+  useEffect(() => {
+    const q = search.trim().toLowerCase();
+
+    if (!q) {
+      setLoading(false);
+      setError("");
+      setFilteredProducts(products);
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    const t = setTimeout(() => {
+      const result = products.filter((p) =>
+        (p.name ?? "").toLowerCase().includes(q)
+      );
+
+      setFilteredProducts(result);
+      setLoading(false);
+
+      if (result.length === 0) {
+        setError("No se encontraron productos con esa búsqueda.");
+      }
+    }, 450);
+
+    return () => clearTimeout(t);
+  }, [search]);
+  // Fin bloque lógica Search bar
+
+  // Productos visibles (máx 3)
   const visibleProducts = useMemo(() => {
-    return products
-    .filter((product) =>
-      product.name.toLowerCase().includes(search.toLowerCase())
-    )
-    .slice(0, 3);
-  }, [products, search]);
+    return filteredProducts.slice(0, 3);
+  }, [filteredProducts]);
 
   // Reviews
   const visibleReviews = useMemo(() => {
@@ -63,8 +96,7 @@ export default function App() {
 
         <div className="results">
           Mostrando <strong>{visibleProducts.length}</strong> de{" "}
-          <strong>{products.length}</strong>
-          {" "} (máx. 9)
+          <strong>{filteredProducts.length}</strong> (máx. 9)
         </div>
 
         <div className="nav-right">
@@ -72,13 +104,23 @@ export default function App() {
             value={search}
             onChange={setSearch}
             placeholder="Buscar producto..."
+            loading={loading}
+            error={error}
           />
         </div>
 
         <div className="grid">
-          {visibleProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {loading ? (
+            <>
+              <div className="product-skeleton" />
+              <div className="product-skeleton" />
+              <div className="product-skeleton" />
+            </>
+          ) : (
+            visibleProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          )}
         </div>
 
         <section id="reseñas" className="reviews-section">
