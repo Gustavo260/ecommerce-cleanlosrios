@@ -22,8 +22,12 @@ export default function App() {
 
   // Productos de limpieza
   const visibleProducts = useMemo(() => {
-    return products.slice(0, 3);
-  }, []);
+    return products
+    .filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .slice(0, 3);
+  }, [products, search]);
 
   // Reviews
   const visibleReviews = useMemo(() => {
