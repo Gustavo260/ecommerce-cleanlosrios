@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
-import { products } from "./components/ProductCard/products";
 import ProductCard from "./components/ProductCard/ProductCard";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
 import { reviews } from "./components/ReviewCard/reviews";
@@ -17,44 +16,92 @@ import "./App.css";
 
 export default function App() {
 
-  // Search bar lógica Inicio
+  // Search bar lógica Inicio + API
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
 
-  useEffect(() => {
-    setFilteredProducts(products);
-  }, []);
+const [filteredProducts, setFilteredProducts] = useState([]);
+const [total, setTotal] = useState(0);
 
-  useEffect(() => {
-    const q = search.trim().toLowerCase();
-
-    if (!q) {
-      setLoading(false);
+ // Carga inicial productos
+useEffect(() => {
+  const loadInitial = async () => {
+    try {
+      setLoading(true);
       setError("");
-      setFilteredProducts(products);
-      return;
-    }
 
-    setLoading(true);
-    setError("");
+      const res = await fetch("http://localhost:3001/products?limit=9&skip=0");
+      if (!res.ok) throw new Error("Error cargando productos");
 
-    const t = setTimeout(() => {
-      const result = products.filter((p) =>
-        (p.name ?? "").toLowerCase().includes(q)
-      );
-
-      setFilteredProducts(result);
+      const data = await res.json();
+      setFilteredProducts(data.products ?? []);
+      setTotal(data.total ?? 0);
+    } catch (e) {
+      setError("No pude cargar productos desde la API.");
+    } finally {
       setLoading(false);
+    }
+  };
 
-      if (result.length === 0) {
-        setError("No se encontraron productos con esa búsqueda.");
+  loadInitial();
+}, []);
+
+// Busqueda en API
+useEffect(() => {
+  const q = search.trim();
+
+  if (!q) {
+    const t = setTimeout(async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const res = await fetch("http://localhost:3001/products?limit=9&skip=0");
+        if (!res.ok) throw new Error();
+
+        const data = await res.json();
+        setFilteredProducts(data.products ?? []);
+        setTotal(data.total ?? 0);
+      } catch (e) {
+        setError("Error consultando la API.");
+      } finally {
+        setLoading(false);
       }
-    }, 450);
+    }, 200);
 
     return () => clearTimeout(t);
-  }, [search]);
+  }
+
+  setLoading(true);
+  setError("");
+
+  const t = setTimeout(async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:3001/products/search?q=${encodeURIComponent(q)}&limit=9&skip=0`
+      );
+
+      if (!res.ok) throw new Error("Error en búsqueda");
+
+      const data = await res.json();
+      const list = data.products ?? [];
+
+      setFilteredProducts(list);
+      setTotal(data.total ?? list.length);
+
+      if (list.length === 0) {
+        setError("No se encontraron productos con esa búsqueda.");
+      }
+    } catch (e) {
+      setError("Error consultando la API.");
+    } finally {
+      setLoading(false);
+    }
+  }, 450);
+
+  return () => clearTimeout(t);
+}, [search]);
   // Fin bloque lógica Search bar
 
   // Productos visibles (máx 3)
@@ -96,7 +143,7 @@ export default function App() {
 
         <div className="results">
           Mostrando <strong>{visibleProducts.length}</strong> de{" "}
-          <strong>{filteredProducts.length}</strong> (máx. 9)
+          <strong>{total}</strong> (máx. 9)
         </div>
 
         <div className="nav-right">
