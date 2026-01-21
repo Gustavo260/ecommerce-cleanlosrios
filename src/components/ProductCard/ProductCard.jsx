@@ -18,12 +18,8 @@ export default function ProductCard({ product }) {
 
       <div className="productCard-body">
         <h3 className="productCard-title">{title}</h3>
-
         <p className="category">{product.category}</p>
-
-        <p className="price">
-          ${Number(product.price).toLocaleString()}
-        </p>
+        <p className="price">${Number(product.price).toLocaleString()}</p>
       </div>
     </article>
   );

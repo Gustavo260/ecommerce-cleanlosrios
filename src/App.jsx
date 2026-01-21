@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 // Importación de componentes
 import SearchBar from "./components/SearchBar/SearchBar";
@@ -16,10 +16,12 @@ import "./App.css";
 
 export default function App() {
 
-  // Search bar lógica Inicio + API
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+// Search bar lógica Inicio + API
+const abortRef = useRef(null);
+
+const [search, setSearch] = useState("");
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
 
 const [filteredProducts, setFilteredProducts] = useState([]);
 const [total, setTotal] = useState(0);
@@ -51,57 +53,76 @@ useEffect(() => {
 useEffect(() => {
   const q = search.trim();
 
+  // Cancela request
+  if (abortRef.current) abortRef.current.abort();
+  const controller = new AbortController();
+  abortRef.current = controller;
+
+  // Carga productos iniciales si esta vacio
   if (!q) {
     const t = setTimeout(async () => {
       try {
         setLoading(true);
         setError("");
 
-        const res = await fetch("http://localhost:3001/products?limit=9&skip=0");
+        const res = await fetch("http://localhost:3001/products?limit=9&skip=0", {
+          signal: controller.signal,
+        });
         if (!res.ok) throw new Error();
 
         const data = await res.json();
         setFilteredProducts(data.products ?? []);
         setTotal(data.total ?? 0);
       } catch (e) {
-        setError("Error consultando la API.");
+        if (e?.name !== "AbortError") setError("Error consultando la API.");
       } finally {
         setLoading(false);
       }
     }, 200);
 
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(t);
+      controller.abort();
+    };
   }
 
   setLoading(true);
   setError("");
 
   const t = setTimeout(async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:3001/products/search?q=${encodeURIComponent(q)}&limit=9&skip=0`
-      );
+      try {
+        const res = await fetch(
+          `http://localhost:3001/products/search?q=${encodeURIComponent(q)}&limit=9&skip=0`,
+          { signal: controller.signal }
+        );
 
-      if (!res.ok) throw new Error("Error en búsqueda");
+        if (!res.ok) throw new Error("Error en búsqueda");
 
-      const data = await res.json();
-      const list = data.products ?? [];
+        const data = await res.json();
+        const list = data.products ?? [];
 
-      setFilteredProducts(list);
-      setTotal(data.total ?? list.length);
+        setFilteredProducts(list);
+        setTotal(data.total ?? list.length);
 
-      if (list.length === 0) {
-        setError("No se encontraron productos con esa búsqueda.");
+        if (list.length === 0) {
+          setError("No se encontraron productos con esa búsqueda.");
+        }
+      } catch (e) {
+         console.error("API error:", e);
+        if (e?.name !== "AbortError") {
+          setError("Error consultando la API."); 
+          console.error("API error:", e);
+        }
+      } finally {
+        setLoading(false);
       }
-    } catch (e) {
-      setError("Error consultando la API.");
-    } finally {
-      setLoading(false);
-    }
-  }, 450);
+    }, 450);
 
-  return () => clearTimeout(t);
-}, [search]);
+    return () => {
+      clearTimeout(t);
+      controller.abort();
+    };
+  }, [search]);
   // Fin bloque lógica Search bar
 
   // Productos visibles (máx 3)

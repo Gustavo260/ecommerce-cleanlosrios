@@ -45,16 +45,6 @@ app.get("/products", (req, res) => {
   });
 });
 
-// GET /products/:id
-app.get("/products/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const found = products.find((p) => p.id === id);
-
-  if (!found) return res.status(404).json({ message: "Product not found" });
-
-  res.json(toDummyShape(found));
-});
-
 // GET /products/search?q=xxx
 app.get("/products/search", (req, res) => {
   const q = String(req.query.q ?? "").trim().toLowerCase();
@@ -78,6 +68,17 @@ app.get("/products/search", (req, res) => {
     skip,
     limit,
   });
+});
+
+
+// GET /products/:id
+app.get("/products/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const found = products.find((p) => p.id === id);
+
+  if (!found) return res.status(404).json({ message: "Product not found" });
+
+  res.json(toDummyShape(found));
 });
 
 // GET /products/categories
