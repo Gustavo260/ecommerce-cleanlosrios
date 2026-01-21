@@ -1,0 +1,14 @@
+.error-message {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff4d4d;
+
+  font-size: 13px;
+  font-weight: 600;
+  max-width: 480px;
+
+  box-shadow: 0 8px 20px rgba(255, 77, 77, 0.15);
+}

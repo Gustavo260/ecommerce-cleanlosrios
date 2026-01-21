@@ -6,6 +6,8 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
 import ProductCard from "./components/ProductCard/ProductCard";
+import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
 import { reviews } from "./components/ReviewCard/reviews";
 import { brands } from "./components/BrandCard/brands";
@@ -158,20 +160,17 @@ useEffect(() => {
             onChange={setSearch}
             placeholder="Buscar producto..."
             loading={loading}
-            error={error}
           />
+
+          <ErrorMessage message={error} />
         </div>
 
         <div className="grid">
           {loading ? (
-            <>
-              <div className="product-skeleton" />
-              <div className="product-skeleton" />
-              <div className="product-skeleton" />
-            </>
+            <Loader count={3} />
           ) : (
             visibleProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} />
             ))
           )}
         </div>
