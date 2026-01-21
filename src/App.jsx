@@ -6,6 +6,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
 import ProductCard from "./components/ProductCard/ProductCard";
+import ProductList from "./components/ProductList/ProductList";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
@@ -165,15 +166,7 @@ useEffect(() => {
           <ErrorMessage message={error} />
         </div>
 
-        <div className="grid">
-          {loading ? (
-            <Loader count={3} />
-          ) : (
-            visibleProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-            ))
-          )}
-        </div>
+        <ProductList products={visibleProducts} loading={loading} skeletonCount={3} />
 
         <section id="reseñas" className="reviews-section">
           <div className="section-head">
