@@ -76,7 +76,7 @@
 }
 
 .results {
-  color: #e5e7eb;
+  color: var(--text-muted);
   margin: 16px 0 10px;
   font-size: 14px;
 }
@@ -166,9 +166,10 @@
 .about {
   margin-top: 26px;
   padding: 16px;
-  border: 1px solid #1f2937;
+  border:1px solid rgba(255,255,255,.08);
   border-radius: 12px;
-  background: #0b0b0ba4;
+  background: rgba(17,24,39,.6);
+  box-shadow: var(--shadow-soft);
 }
 
 /* FOOTER */

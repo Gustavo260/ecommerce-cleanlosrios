@@ -15,6 +15,7 @@ import { brands } from "./components/BrandCard/brands";
 import BrandCard from "./components/BrandCard/BrandCard";
 import { faqs } from "./components/FaqItem/faqs";
 import FaqItem from "./components/FaqItem/FaqItem";
+import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 
@@ -212,9 +213,7 @@ useEffect(() => {
 
       </main>
 
-      <footer className="footer">
-        © {new Date().getFullYear()} CleanLosRios
-      </footer>
+      <Footer />
     </>
   );
 }
