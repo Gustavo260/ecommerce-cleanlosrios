@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 
 // Importación de componentes
+import Header from "./components/Header/Header"
 import SearchBar from "./components/SearchBar/SearchBar";
 import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
@@ -140,23 +141,7 @@ useEffect(() => {
 
   return (
     <>
-      <nav className="navbar">
-        <div className="nav-left">
-          <div className="logo">🧹 CleanLosRios</div>
-
-          <ul className="nav-links">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#nosotros">Nosotros</a></li>
-          </ul>
-        </div>
-
-      </nav>
-
-      <header id="inicio" className="header">
-        <h1>Productos de limpieza</h1>
-        <p>Sitio de ejemplo para un ecommerce de solo productos de limpieza</p>
-      </header>
+      <Header />
 
       <main id="productos" className="container">
 
