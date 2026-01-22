@@ -5,10 +5,8 @@ import Header from "./components/Header/Header"
 import SearchBar from "./components/SearchBar/SearchBar";
 import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
-import ProductCard from "./components/ProductCard/ProductCard";
 import ProductList from "./components/ProductList/ProductList";
 import ProductModal from "./components/ProductModal/ProductModal";
-import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
 import { reviews } from "./components/ReviewCard/reviews";
