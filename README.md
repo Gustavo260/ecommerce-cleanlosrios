@@ -21,6 +21,7 @@ Es una app donde simula el comportamiento básico de un ecommerce de productos d
 1) git clone https://github.com/Gustavo260/ecommerce-cleanlosrios.git
 2) npm install (Instala dependencias), apliquelos tanto para la raíz del proyecto "\ecommerce-cleanlosrios" y para "\ecommerce-cleanlosrios\backend"
 3) npm run dev (Para arrancarlo localmente), ejecutelo tanto para la raíz del proyecto "\ecommerce-cleanlosrios" y para "\ecommerce-cleanlosrios\backend"
+4) Iniciar la app usando el siguiente enlace: http://localhost:5173/#inicio
 
 # Tecnologías usadas
 1) Typescript
