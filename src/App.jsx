@@ -7,6 +7,7 @@ import PromoCarousel from "./components/PromoCarousel/PromoCarousel";
 import { promotions } from "./components/PromoCarousel/promotions";
 import ProductCard from "./components/ProductCard/ProductCard";
 import ProductList from "./components/ProductList/ProductList";
+import ProductModal from "./components/ProductModal/ProductModal";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ReviewCard from "./components/ReviewCard/ReviewCard";
@@ -30,6 +31,8 @@ const [error, setError] = useState("");
 
 const [filteredProducts, setFilteredProducts] = useState([]);
 const [total, setTotal] = useState(0);
+
+const [selectedProduct, setSelectedProduct] = useState(null);
 
  // Carga inicial productos
 useEffect(() => {
@@ -167,7 +170,17 @@ useEffect(() => {
           <ErrorMessage message={error} />
         </div>
 
-        <ProductList products={visibleProducts} loading={loading} skeletonCount={3} />
+        <ProductList
+          products={visibleProducts}
+          loading={loading}
+          skeletonCount={3}
+          onOpen={setSelectedProduct}
+        />
+
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
 
         <section id="reseñas" className="reviews-section">
           <div className="section-head">

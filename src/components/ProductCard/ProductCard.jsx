@@ -1,7 +1,7 @@
 import defaultImage from "../../assets/images/image-default.png";
 import "./ProductCard.css";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onOpen }) {
   const title = product.title ?? product.name ?? "Producto";
   const imageSrc = product.thumbnail ?? product.image ?? defaultImage;
 
@@ -11,6 +11,8 @@ export default function ProductCard({ product }) {
         className="productCard-img"
         src={imageSrc}
         alt={title}
+        style={{ cursor: "pointer" }}
+        onClick={() => onOpen?.(product)}
         onError={(e) => {
           e.currentTarget.src = defaultImage;
         }}

@@ -6,7 +6,9 @@ export default function Header() {
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="nav-left">
-          <div className="logo">🧹 CleanLosRios</div>
+          <a href="#inicio" className="logo">
+            🧹 CleanLosRios
+          </a>
 
           <ul className="nav-links">
             <li><a href="#inicio">Inicio</a></li>

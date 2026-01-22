@@ -25,22 +25,27 @@
 
 /* ===== LOGO ===== */
 .logo {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 
+  font-size: 22px;
+  font-weight: 900;
+  color: #ffffff;
+
+  text-decoration: none;   /* 🔥 quita subrayado */
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .logo:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
+  color: #a3e635;
+  text-shadow: 0 0 8px rgba(163, 230, 53, 0.6);
+}
+
+.logo:active {
+  transform: scale(0.98);
 }
 
 /* ===== LINKS ===== */

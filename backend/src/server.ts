@@ -10,18 +10,31 @@ const PORT = process.env.PORT ? Number(process.env.PORT) : 3001;
 
 // Adaptador para que se parezca a dummyjson.com/products
 function toDummyShape(p: any) {
+  const title = p.title ?? p.name ?? `Producto ${p.id}`;
+  const thumbnail = p.thumbnail ?? p.image ?? null;
+
+  const images =
+    Array.isArray(p.images) && p.images.length > 0
+      ? p.images
+      : thumbnail
+      ? [thumbnail]
+      : [];
+
   return {
     id: p.id,
-    title: p.name,                 // dummyjson usa "title"
-    price: p.price,
-    category: p.category,
-    thumbnail: p.image,            // dummyjson usa "thumbnail"
-    images: [p.image],             // dummyjson suele traer array
-    // extras opcionales por compatibilidad:
-    description: "Producto de limpieza",
-    rating: 4.5,
-    stock: 50,
-    brand: "CleanLosRios",
+    title,                
+    price: p.price ?? 0,
+    category: p.category ?? "Sin categoría",
+    thumbnail,            
+    images,              
+
+    vendor: p.vendor ?? p.brand ?? "CleanLosRios",
+    shortDescription: p.shortDescription ?? p.description ?? "",
+
+    description: p.description ?? "Producto de limpieza",
+    rating: p.rating ?? 4.5,
+    stock: p.stock ?? 50,
+    brand: p.brand ?? "CleanLosRios",
   };
 }
 
@@ -51,17 +64,15 @@ app.get("/products/search", (req, res) => {
   const limit = Math.max(0, Number(req.query.limit ?? 30));
   const skip = Math.max(0, Number(req.query.skip ?? 0));
 
-  const filtered = products.filter((p) => {
-    const name = (p.name ?? "").toLowerCase();
-    const category = (p.category ?? "").toLowerCase();
-    return name.includes(q) || category.includes(q);
+  const filtered = products.filter((p: any) => {
+    const title = String(p.title ?? p.name ?? "").toLowerCase();
+    const category = String(p.category ?? "").toLowerCase();
+    return title.includes(q) || category.includes(q);
   });
 
   const mapped = filtered.map(toDummyShape);
   const sliced = mapped.slice(skip, skip + limit);
 
-  // dummyjson normalmente responde 200 aunque venga vacío,
-  // pero si tú quieres “error cuando no hay”, puedes mandar 404 aquí.
   res.json({
     products: sliced,
     total: mapped.length,
@@ -70,11 +81,10 @@ app.get("/products/search", (req, res) => {
   });
 });
 
-
 // GET /products/:id
 app.get("/products/:id", (req, res) => {
   const id = Number(req.params.id);
-  const found = products.find((p) => p.id === id);
+  const found = products.find((p: any) => p.id === id);
 
   if (!found) return res.status(404).json({ message: "Product not found" });
 
@@ -83,7 +93,7 @@ app.get("/products/:id", (req, res) => {
 
 // GET /products/categories
 app.get("/products/categories", (_req, res) => {
-  const categories = Array.from(new Set(products.map((p) => p.category)));
+  const categories = Array.from(new Set(products.map((p: any) => p.category)));
   res.json(categories);
 });
 
@@ -94,7 +104,7 @@ app.get("/products/category/:category", (req, res) => {
   const skip = Math.max(0, Number(req.query.skip ?? 0));
 
   const filtered = products.filter(
-    (p) => (p.category ?? "").toLowerCase() === categoryParam
+    (p: any) => String(p.category ?? "").toLowerCase() === categoryParam
   );
 
   const mapped = filtered.map(toDummyShape);
