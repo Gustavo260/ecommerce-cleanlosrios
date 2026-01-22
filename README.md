@@ -43,3 +43,5 @@ https://prnt.sc/U8qk7kg99ydA
 https://prnt.sc/UqKlwS-ZMhkL
 https://prnt.sc/F93WHbe278Jc
 https://prnt.sc/u7YH3qrFUGHT
+
+Ejemplo loading funcionando: https://prnt.sc/sAktwFshv6H8
